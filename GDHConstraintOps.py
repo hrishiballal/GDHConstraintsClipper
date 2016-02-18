@@ -82,6 +82,6 @@ if __name__ == "__main__":
 	for curFeat in choppedFeatures:
 		tmpGJ = {'type':'FeatureCollection', 'features': [curFeat]}
 		targetReqID= 13
-		print json.dumps(tmpGJ)
+		# print json.dumps(tmpGJ)
 		upload = firstAPIHelper.post_as_diagram(geoms = tmpGJ, projectorpolicy= 'project',featuretype = 'polygon', description= 'Chopped Corridoor', reqid = targetReqID)
 		print upload.text
