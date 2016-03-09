@@ -21,17 +21,17 @@ class GeodesignHubClient():
 		r = requests.get(securl, headers=headers)
 		return r
 
-	def post_as_diagram(self,geoms, projectorpolicy, featuretype, description, reqid ):
+	def post_as_diagram(self,geoms, projectorpolicy, featuretype, description, sysid ):
 		''' Create a requests object with correct headers and creds. '''
-		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(reqid) + '/'+ 'add' +'/' + projectorpolicy +'/'
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(sysid) + '/'+ 'add' +'/' + projectorpolicy +'/'
 		headers = {'Authorization': 'Token '+ self.token, 'content-type': 'application/json'}
 		postdata = {'geometry':geoms, 'description':description, 'featuretype':featuretype}
 		r = requests.post(securl, headers= headers, data = json.dumps(postdata))
 		return r
 
-	def post_as_ealuation_JSON(self, geoms, reqid, username=None):
+	def post_as_ealuation_JSON(self, geoms, sysid, username=None):
 		''' Create a requests object with correct headers and creds. '''
-		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(reqid) + '/e/map/json/'
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(sysid) + '/e/map/json/'
 		if username:
 			securl += username +'/'
 		headers = {'Authorization': 'Token '+ self.token, 'content-type': 'application/json'}
@@ -39,10 +39,10 @@ class GeodesignHubClient():
 		r = requests.post(securl, headers= headers, data = json.dumps(geoms))
 		return r
 
-	def post_as_impact_JSON(self, geoms, reqid, username=None):
+	def post_as_impact_JSON(self, geoms, sysid, username=None):
 		''' Create a requests object with correct headers and creds. '''
 
-		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(reqid) + '/i/map/json/'
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(sysid) + '/i/map/json/'
 		if username:
 			securl += username +'/'
 
@@ -50,9 +50,9 @@ class GeodesignHubClient():
 		r = requests.post(securl, headers= headers, data = json.dumps(geoms))
 		return r
 
-	def post_as_evaluation_GBF(self, geoms, reqid, username=None):
+	def post_as_evaluation_GBF(self, geoms, sysid, username=None):
 		''' Create a requests object with correct headers and creds. '''
-		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(reqid) + '/e/map/gbf/'
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(sysid) + '/e/map/gbf/'
 		if username:
 			securl += username +'/'
 		headers = {'Authorization': 'Token '+ self.token}
@@ -60,10 +60,10 @@ class GeodesignHubClient():
 		r = requests.post(securl, headers= headers, files = {'geoms.gbf':geoms})
 		return r
 
-	def post_as_impact_GBF(self, geoms, reqid, username=None):
+	def post_as_impact_GBF(self, geoms, sysid, username=None):
 		''' Create a requests object with correct headers and creds. '''
 
-		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(reqid) + '/i/map/gbf/'
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(sysid) + '/i/map/gbf/'
 		if username:
 			securl += username +'/'
 		headers = {'Authorization': 'Token '+ self.token}
