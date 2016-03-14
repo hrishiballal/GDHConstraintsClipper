@@ -60,6 +60,14 @@ class GeodesignHubClient():
 		r = requests.post(securl, headers= headers, files = {'geoms.gbf':geoms})
 		return r
 
+	def post_gdservice_JSON(self, geometry, jobid):
+		''' Create a requests object with correct headers and creds. '''
+		securl = self.securl+ 'gdservices/callback/'
+		headers = {'Authorization': 'Token '+ self.token, 'content-type': 'application/json'}
+		data = {"geometry": geometry, "jobid": jobid}
+		r = requests.post(securl, headers= headers, data = json.dumps(data))
+		return r
+
 	def post_as_impact_GBF(self, geoms, sysid, username=None):
 		''' Create a requests object with correct headers and creds. '''
 
