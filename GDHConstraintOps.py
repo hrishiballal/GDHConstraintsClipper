@@ -1,6 +1,6 @@
 import requests, json, GeodesignHub
 import shapelyHelper
-import logging
+import logging, config
 from shapely.geometry.base import BaseGeometry
 from shapely.geometry import shape, mapping, shape, asShape
 from shapely.geometry import MultiPolygon, MultiPoint, MultiLineString
@@ -58,7 +58,7 @@ class ConstraintsClipper():
 
 
 if __name__ == "__main__":
-	firstAPIHelper = GeodesignHub.GeodesignHubClient(url = 'http://local.dev:8000/api/v1/', project_id='62ead880b1592bc0', token='5d72a5465bc8a61bb6dd02457cbf97150735bfbf')
+	firstAPIHelper = GeodesignHub.GeodesignHubClient(url = config.apisettings['serviceurl'], project_id=config.apisettings['projectid'], token=config.apisettings['apitoken'])
 
 
 	r1 = firstAPIHelper.get_constraints_geoms()
