@@ -24,7 +24,7 @@ class ConstraintsClipper():
 		finalGeoms = []
 		diagGeoms = []
 		for curFeature in constraints['features']:
-			if curFeature['properties']['areatype'] =='boundaries':
+			if curFeature['properties']['areatype'] =='constraints':
 				boundaryGeoms, errorCounter = self.genFeature(curFeature['geometry'],allGeoms=boundaryGeoms, errorCounter=0)
 
 		for curFeature in diaggeoms['features']:
@@ -59,14 +59,11 @@ class ConstraintsClipper():
 
 if __name__ == "__main__":
 	firstAPIHelper = GeodesignHub.GeodesignHubClient(url = config.apisettings['serviceurl'], project_id=config.apisettings['projectid'], token=config.apisettings['apitoken'])
-
-
 	r1 = firstAPIHelper.get_constraints_geoms()
 	firstDiagID = 58 # diagram to be clipped to constraints.
 	r2 = firstAPIHelper.get_diagram_geoms(firstDiagID)
 
 	if r1.status_code == 200:
-
 		op = json.loads(r1.text)
 		constraints = op['geojson']
 

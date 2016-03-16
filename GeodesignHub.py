@@ -21,6 +21,20 @@ class GeodesignHubClient():
 		r = requests.get(securl, headers=headers)
 		return r
 
+	def get_boundaries_geoms(self):
+		''' Create a requests object with correct headers and creds. '''
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'boundaries' + '/'
+		headers = {'Authorization': 'Token '+ self.token}
+		r = requests.get(securl, headers=headers)
+		return r
+
+	def get_secondboundaries_geoms(self):
+		''' Create a requests object with correct headers and creds. '''
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'secondboundaries' + '/'
+		headers = {'Authorization': 'Token '+ self.token}
+		r = requests.get(securl, headers=headers)
+		return r
+
 	def post_as_diagram(self,geoms, projectorpolicy, featuretype, description, sysid ):
 		''' Create a requests object with correct headers and creds. '''
 		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems'+'/'+ str(sysid) + '/'+ 'add' +'/' + projectorpolicy +'/'
