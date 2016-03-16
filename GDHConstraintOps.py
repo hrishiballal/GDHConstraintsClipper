@@ -20,22 +20,22 @@ class ConstraintsClipper():
 		return allGeoms, errorCounter
 
 	def clipToConstraints(self, constraints, diaggeoms):
-		boundaryGeoms = []
+		constraintGeoms = []
 		finalGeoms = []
 		diagGeoms = []
 		for curFeature in constraints['features']:
 			if curFeature['properties']['areatype'] =='constraints':
-				boundaryGeoms, errorCounter = self.genFeature(curFeature['geometry'],allGeoms=boundaryGeoms, errorCounter=0)
+				constraintGeoms, errorCounter = self.genFeature(curFeature['geometry'],allGeoms=constraintGeoms, errorCounter=0)
 
 		for curFeature in diaggeoms['features']:
 			diagGeoms, errorCounter = self.genFeature(curFeature['geometry'],allGeoms=diagGeoms, errorCounter=0)
 
 		for curDiagGeom in diagGeoms:
-			for boundaryGeom in boundaryGeoms:
-				d = curDiagGeom.intersects(boundaryGeom)
+			for constraintGeom in constraintGeoms:
+				d = curDiagGeom.intersects(constraintGeom)
 				if d:
 
-					d = curDiagGeom.intersection(boundaryGeom)
+					d = curDiagGeom.intersection(constraintGeom)
 					d= json.loads(shapelyHelper.export_to_JSON(d))
 
 					if (d['type']=='MultiPolygon'):
