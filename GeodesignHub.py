@@ -7,6 +7,13 @@ class GeodesignHubClient():
 		self.token = token
 		self.securl = url if url else 'https://www.geodesignhub.com/api/v1/'
 
+	def get_all_systems(self):
+		''' Create a requests object with correct headers and creds. '''
+		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'systems' + '/'
+		headers = {'Authorization': 'Token '+ self.token}
+		r = requests.get(securl, headers=headers)
+		return r
+
 	def get_diagram_geoms(self, diagid):
 		''' Create a requests object with correct headers and creds. '''
 		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'diagrams' + '/'+ str(diagid) +'/'
@@ -24,13 +31,6 @@ class GeodesignHubClient():
 	def get_boundaries_geoms(self):
 		''' Create a requests object with correct headers and creds. '''
 		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'boundaries' + '/'
-		headers = {'Authorization': 'Token '+ self.token}
-		r = requests.get(securl, headers=headers)
-		return r
-
-	def get_secondboundaries_geoms(self):
-		''' Create a requests object with correct headers and creds. '''
-		securl = self.securl+ 'projects'+ '/' + self.projectid + '/' +'secondboundaries' + '/'
 		headers = {'Authorization': 'Token '+ self.token}
 		r = requests.get(securl, headers=headers)
 		return r
@@ -73,6 +73,7 @@ class GeodesignHubClient():
 
 		r = requests.post(securl, headers= headers, files = {'geoms.gbf':geoms})
 		return r
+
 
 	def post_gdservice_JSON(self, geometry, jobid):
 		''' Create a requests object with correct headers and creds. '''
