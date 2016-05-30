@@ -59,9 +59,9 @@ class ConstraintsClipper():
 
 if __name__ == "__main__":
 	firstAPIHelper = GeodesignHub.GeodesignHubClient(url = config.apisettings['serviceurl'], project_id=config.apisettings['projectid'], token=config.apisettings['apitoken'])
-	r1 = firstAPIHelper.get_constraints_geoms()
+	r1 = firstAPIHelper.get_constraints()
 	firstDiagID = 58 # diagram to be clipped to constraints.
-	r2 = firstAPIHelper.get_diagram_geoms(firstDiagID)
+	r2 = firstAPIHelper.get_diagram(firstDiagID)
 
 	if r1.status_code == 200:
 		op = json.loads(r1.text)
